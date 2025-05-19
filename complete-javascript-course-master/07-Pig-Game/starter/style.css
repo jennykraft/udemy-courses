@@ -27,7 +27,7 @@ main {
   position: relative;
   width: 100rem;
   height: 60rem;
-  background-color: rgba(255, 255, 255, 0.35);
+  background-color: rgb(255, 255, 255);
   backdrop-filter: blur(200px);
   filter: blur();
   box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
@@ -66,9 +66,11 @@ main {
 .player--active {
   background-color: rgba(255, 255, 255, 0.4);
 }
+
 .player--active .name {
   font-weight: 700;
 }
+
 .player--active .score {
   font-weight: 400;
 }
@@ -132,9 +134,11 @@ main {
 .btn--new {
   top: 4rem;
 }
+
 .btn--roll {
   top: 39.3rem;
 }
+
 .btn--hold {
   top: 46.1rem;
 }
@@ -158,10 +162,95 @@ main {
 }
 
 .player--winner {
-  background-color: #2f2f2f;
+  background-color: #1ce4a4;
 }
 
 .player--winner .name {
   font-weight: 700;
   color: #c7365f;
+}
+
+
+.player-list-panel {
+  flex: 30%;
+  padding: 3rem 2rem;
+  background-color: rgba(255, 255, 255, .2);
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  overflow-y: auto;
+}
+
+
+#active-player-panel {
+  flex: 70%;
+}
+
+.player-summary {
+  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.player-summary .dots {
+  flex: 1 1 auto;
+  border-bottom: 1px dotted currentColor;
+  margin: 0 .8rem;
+}
+
+.player-list-panel {
+  flex: 30%;
+  background-color: #cc317741;
+}
+
+#active-player-panel {
+  flex: 50%;
+  padding: 6rem;
+}
+
+.controls-panel {
+  flex: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2rem;
+  background-color: #cc3177;
+  padding: 3rem 2rem;
+}
+
+
+.btn {
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
+  width: 100%;
+  text-align: center;
+}
+
+.btn--new,
+.btn--roll,
+.btn--hold {
+  top: auto;
+}
+
+
+.dice {
+  position: static;
+  left: auto;
+  top: auto;
+  transform: none;
+  height: 10rem;
+  margin: 3rem 0;
+}
+
+.controls-panel .btn {
+  position: static !important;
+  left: auto !important;
+  transform: none !important;
+  width: 100%;
+  display: block;
+  background-color: white;
 }
