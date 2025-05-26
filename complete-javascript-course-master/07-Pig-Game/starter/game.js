@@ -7,7 +7,7 @@ export class Game {
     #dice;
     #maxPlayers = 10;
     #currentPlayerIndex;
-    #scoreToWin = 50;
+    #scoreToWin = 100;
 
     constructor(numberOfPlayers) {
         if (numberOfPlayers > 1 && numberOfPlayers <= this.#maxPlayers) {

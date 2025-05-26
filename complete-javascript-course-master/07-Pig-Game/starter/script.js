@@ -5,31 +5,35 @@ const diceEl = document.querySelector('.dice');
 const btnNew = document.querySelector('.btn--new');
 const btnRoll = document.querySelector('.btn--roll');
 const btnHold = document.querySelector('.btn--hold');
+const playerSelect = document.getElementById('player-count');
+const activePanel = document.getElementById('active-player-panel');
+const nameEl = document.getElementById('name--0');
+const scoreEl = document.getElementById('score--0');
+const currentEl = document.getElementById('current--0');
+const otherPlayersEl = document.getElementById('other-players');
 
+let game = new Game(2);
 let playing = true;
-const game = new Game(5); // 5 player
 
 function render() {
-    const state = game.gameState;
-    const activePlayer = state.players[state.currentPlayerIndex];
+    const { players, currentPlayerIndex, diceValue } = game.gameState;
+    const activePlayer = players[currentPlayerIndex];
 
-    document.getElementById('name--0').textContent = activePlayer.name;
-    document.getElementById('score--0').textContent = activePlayer.score;
-    document.getElementById('current--0').textContent = activePlayer.currentScore;
+    nameEl.textContent = activePlayer.name;
+    scoreEl.textContent = activePlayer.score;
+    currentEl.textContent = activePlayer.currentScore;
 
-    const list = document.getElementById('other-players');
-    list.innerHTML = '';
-    state.players.forEach((p, i) => {
-        if (i === state.currentPlayerIndex) return;
+    otherPlayersEl.innerHTML = '';
+    players.forEach((p, i) => {
+        if (i === currentPlayerIndex) return;
         const row = document.createElement('div');
         row.className = 'player-summary';
-        row.innerHTML =
-            `<strong>${p.name}</strong><span class="dots"></span>${p.score}`;
-        list.appendChild(row);
+        row.innerHTML = `<strong>${p.name}</strong><span class="dots"></span>${p.score}`;
+        otherPlayersEl.appendChild(row);
     });
 
-    if (state.diceValue) {
-        diceEl.src = `dice-${state.diceValue}.png?${Date.now()}`;
+    if (diceValue) {
+        diceEl.src = `dice-${diceValue}.png?${Date.now()}`;
         diceEl.classList.remove('hidden');
     } else {
         diceEl.classList.add('hidden');
@@ -48,18 +52,21 @@ btnHold.addEventListener('click', () => {
     if (won) {
         playing = false;
         diceEl.classList.add('hidden');
-        document.getElementById('active-player-panel')
-            .classList.add('player--winner');
+        activePanel.classList.add('player--winner');
     }
     render();
 });
 
 btnNew.addEventListener('click', () => {
-    game.resetGame();
+    const playerCount = parseInt(playerSelect.value, 10) || 2;
+    game = new Game(playerCount);
     playing = true;
-    document.getElementById('active-player-panel')
-        .classList.remove('player--winner');
+    activePanel.classList.remove('player--winner');
     render();
+});
+
+btnInstructions.addEventListener('click', () => {
+    instructions.classList.toggle('hidden');
 });
 
 render();
