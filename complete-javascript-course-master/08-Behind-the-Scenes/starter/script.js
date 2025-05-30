@@ -32,3 +32,69 @@ function calcAge(birthYear) {
 
 const firstName = 'Jonas';
 calcAge(1994);
+
+/* --------------------------------- */
+console.log("Hoisting");
+
+/*
+console.log(me);
+console.log(job);
+console.log(year);
+
+var me = 'Jonas';
+let job = 'teacher';
+const year = 1991;
+
+
+console.log(addDecl(2, 3));
+console.log(addExpr(2, 3));
+
+function addDecl(a, b) {
+    return a + b;
+}
+
+const addExpr = function (a, b) {
+    return a + b;
+}
+
+*/
+
+console.log("this");
+
+console.log(this);
+
+const calcAge2 = function (birthYear) {
+    console.log(2025 - birthYear);
+    console.log(this); // undefined
+}
+calcAge2(2003);
+
+const calcAgeArrow = birthYear => {
+    console.log(2025 - birthYear);
+    console.log(this); // window
+}
+
+calcAgeArrow(1999);
+
+
+const jonas = {
+    year: 1991,
+    calcAge: function () {
+        console.log(this);
+        console.log(2025 - this.year);
+    },
+};
+jonas.calcAge();
+
+const matilda = {
+    year: 2020,
+};
+
+matilda.calcAge = jonas.calcAge; // copy the method
+
+matilda.calcAge(); // works, returns 5
+// this always points to the object which is calling the method
+
+const f = jonas.calcAge; // copy the function into a new variable
+
+//f(); // this is undefined so you get an error
