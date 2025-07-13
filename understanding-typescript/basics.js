@@ -81,3 +81,91 @@ function access(role) {
     console.log(role);
 }
 access('editor');
+// ────────────────────────────────────────────────────────────────
+// function return value types
+// ────────────────────────────────────────────────────────────────
+function add2(a, b) {
+    return a + b;
+}
+// special return type void
+function hello(h) {
+    console.log(h);
+}
+// type never
+function logAndThrow(errorMessage) {
+    console.log(errorMessage);
+    throw new Error(errorMessage);
+}
+// ────────────────────────────────────────────────────────────────
+// function as types
+// ──────────────────────────────────────────────────────────────── 
+function performJob(cb) {
+    cb('Jobs done!');
+}
+performJob(hello);
+var user3 = {
+    name: 'Max',
+    age: 30,
+    greet: function () {
+        return this.name;
+    }
+};
+console.log(user3.greet());
+// ────────────────────────────────────────────────────────────────
+// types null and undefined
+// ──────────────────────────────────────────────────────────────── 
+var a;
+var b;
+a = null;
+b = undefined;
+if (!a) {
+    //throw new Error('Element not found');
+    console.log('a not found');
+}
+if (!b) {
+    console.log('b not found');
+}
+// ────────────────────────────────────────────────────────────────
+// forced "not null" and optional chaining
+// ──────────────────────────────────────────────────────────────── 
+// instead of using if (!a)... you can also just put ! after code that potentially could be null 
+var c = a + b; // but you disable typescript with this, error is just silenced
+console.log(c);
+console.log(user3 === null || user3 === void 0 ? void 0 : user3.age);
+// ────────────────────────────────────────────────────────────────
+// type casting
+// ──────────────────────────────────────────────────────────────── 
+// const inputEl = document.getElementId('user-name') as HTMLInputElement | null;
+// console.log(inputEl?.value);
+// ────────────────────────────────────────────────────────────────
+// type unknown
+// ──────────────────────────────────────────────────────────────── 
+function process(val) {
+    if (typeof val === 'string') {
+        console.log('It is a string');
+    }
+    if (typeof val === 'number') {
+        console.log('It is a number');
+    }
+} // typescript forces you to check the type first if you want to do something like val.log, so you first need to check if it's type object and if there is log in val.
+// with type "any" you would just get a runtime error. It wouldn't force you to check it before executing.
+process('hi');
+process(10);
+// ────────────────────────────────────────────────────────────────
+// optional values
+// ────────────────────────────────────────────────────────────────
+function generateError(msg) {
+    if (msg) {
+        throw new Error(msg);
+    }
+    else {
+        console.log('no error');
+    }
+}
+generateError();
+// ────────────────────────────────────────────────────────────────
+// nullish coalescing "??"
+// ────────────────────────────────────────────────────────────────
+var input = null;
+var didProvideInput = input !== null && input !== void 0 ? input : false; // checks not for falsy values but undefined and null values
+console.log(didProvideInput);
