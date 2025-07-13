@@ -1,5 +1,5 @@
 let userName: string;
-let userAge = 30; // hier braucht man keine explizite Typzuweisung, weil mans direkt zuweist
+let userAge = 30; // no explicite type needed
 
 userName = 'Max';
 console.log(userName);
