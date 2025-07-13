@@ -193,7 +193,8 @@ function process(val: unknown) {
     if (typeof val === 'number') {
         console.log('It is a number');
     }
-} // typescript forces you to check the type first if you want to do something like val.log, so you first need to check if it's type object and if there is log in val.
+}
+// typescript forces you to check the type first if you want to do something like val.log, so you first need to check if it's type object and if there is log in val.
 // with type "any" you would just get a runtime error. It wouldn't force you to check it before executing.
 process('hi');
 process(10);
